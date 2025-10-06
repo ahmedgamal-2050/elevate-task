@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { forkJoin, finalize } from 'rxjs';
 import { IssueService } from '../services/issue.service';
+import { IssueCommentsComponent } from '../issue-comments/issue-comments.component';
 
 @Component({
   selector: 'app-issue-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, IssueCommentsComponent],
   templateUrl: './issue-details.component.html',
   styleUrl: './issue-details.component.scss',
 })

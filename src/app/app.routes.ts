@@ -1,32 +1,32 @@
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
-  { path: '', pathMatch: 'full', redirectTo: 'issues' },
+  { path: '', pathMatch: 'full', redirectTo: 'issue/list' },
   {
-    path: 'issues',
+    path: 'issue/list',
     loadComponent: () =>
       import('./pages/issues/issues.component').then((m) => m.IssuesComponent),
   },
   {
-    path: 'issues/:id',
+    path: 'issue/create',
+    loadComponent: () =>
+      import('./pages/issues/issue-form/issue-form.component').then(
+        (m) => m.IssueFormComponent
+      ),
+  },
+  {
+    path: 'issue/:id',
     loadComponent: () =>
       import('./pages/issues/issue-details/issue-details.component').then(
         (m) => m.IssueDetailsComponent
       ),
   },
   {
-    path: 'issues/:id/comments',
+    path: 'issue/:id/comments',
     loadComponent: () =>
       import('./pages/issues/issue-comments/issue-comments.component').then(
         (m) => m.IssueCommentsComponent
       ),
   },
-  {
-    path: 'issues/form',
-    loadComponent: () =>
-      import('./pages/issues/issue-form/issue-form.component').then(
-        (m) => m.IssueFormComponent
-      ),
-  },
-  { path: '**', redirectTo: 'issues' },
+  { path: '**', redirectTo: 'issue/list' },
 ];

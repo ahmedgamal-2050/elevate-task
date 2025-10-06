@@ -53,15 +53,7 @@
 
     <ul class="space-y-3">
       @for (comment of comments(); track comment.id) {
-      <li class="rounded-md border border-gray-200 bg-white p-4">
-        <div class="mb-1 text-sm font-medium text-gray-900">
-          {{ comment.name }}
-        </div>
-
-        <div class="mb-2 text-xs text-gray-500">{{ comment.email }}</div>
-
-        <div class="text-sm text-gray-700">{{ comment.body }}</div>
-      </li>
+      <app-issue-comments [comment]="comment" />
       }
     </ul>
   </section>
