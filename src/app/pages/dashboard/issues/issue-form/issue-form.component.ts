@@ -48,7 +48,7 @@ export class IssueFormComponent implements OnInit {
     this.success.set(null);
     const payload = this.form.getRawValue();
     this.issueService.createIssue(payload).subscribe({
-      next: (res) => {
+      next: res => {
         if (res) {
           const status = res.status as number | undefined;
           const created = res.body;

@@ -8,7 +8,7 @@ export const appRoutes: Route[] = [
     path: APP_ROUTES.DASHBOARD.ISSUE.ROOT,
     loadComponent: () =>
       import('./layout/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
+        m => m.DashboardComponent
       ),
     children: [...dashboardRoutes],
   },

@@ -3,18 +3,17 @@
 
   <div class="flex items-center gap-2">
     @if (!loading() && !error()) {
-    <span class="text-sm text-gray-500">
-      {{ filteredIssues().length }} shown
-    </span>
+      <span class="text-sm text-gray-500">
+        {{ filteredIssues().length }} shown
+      </span>
     }
 
     <a
       [routerLink]="[
         '/' + appRoutes.DASHBOARD.ISSUE.ROOT,
-        appRoutes.DASHBOARD.ISSUE.CREATE
+        appRoutes.DASHBOARD.ISSUE.CREATE,
       ]"
-      class="text-sm bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-    >
+      class="text-sm bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
       Create Issue
     </a>
   </div>
@@ -25,63 +24,71 @@
     type="text"
     placeholder="Search by title..."
     (input)="onSearch($event)"
-    class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-  />
+    class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" />
 </div>
 
 @if (loading()) {
-<div class="flex items-center gap-2 text-gray-600">
-  <svg
-    class="h-5 w-5 animate-spin"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-  >
-    <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4"></circle>
-    <path class="opacity-75" d="M4 12a8 8 0 018-8" stroke-width="4"></path>
-  </svg>
-  <span>Loading...</span>
-</div>
-} @if (error()) {
-<div
-  class="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700"
->
-  {{ error() }}
-  <button
-    (click)="getIssues()"
-    class="ml-3 inline-flex items-center rounded-md bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-red-700"
-  >
-    Retry
-  </button>
-</div>
-} @if (!loading() && !error()) {
-<ul class="divide-y divide-gray-200 rounded-md border border-gray-200 bg-white">
-  @for (issue of filteredIssues(); track issue.id) {
-  <li class="group">
-    <a
-      [routerLink]="[
-        '/' + appRoutes.DASHBOARD.ISSUE.ROOT,
-        appRoutes.DASHBOARD.ISSUE.DETAILS,
-        issue.id
-      ]"
-      class="block p-4 hover:bg-gray-50"
-    >
-      <div class="flex items-start justify-between">
-        <h2
-          class="text-base font-medium text-gray-900 group-hover:text-blue-700"
-        >
-          {{ issue.title }}
-        </h2>
+  <div class="flex items-center gap-2 text-gray-600">
+    <svg
+      class="h-5 w-5 animate-spin"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor">
+      <circle
+        class="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke-width="4"></circle>
+      <path class="opacity-75" d="M4 12a8 8 0 018-8" stroke-width="4"></path>
+    </svg>
 
-        <span
-          class="ml-4 shrink-0 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700"
-          >#{{ issue.id }}</span
-        >
-      </div>
+    <span>Loading...</span>
+  </div>
+}
 
-      <p class="mt-1 line-clamp-2 text-sm text-gray-600">{{ issue.body }}</p>
-    </a>
-  </li>
-  }
-</ul>
+@if (error()) {
+  <div
+    class="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+    {{ error() }}
+
+    <button
+      (click)="getIssues()"
+      class="ml-3 inline-flex items-center rounded-md bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white hover:bg-red-700">
+      Retry
+    </button>
+  </div>
+}
+
+@if (!loading() && !error()) {
+  <ul
+    class="divide-y divide-gray-200 rounded-md border border-gray-200 bg-white">
+    @for (issue of filteredIssues(); track issue.id) {
+      <li class="group">
+        <a
+          [routerLink]="[
+            '/' + appRoutes.DASHBOARD.ISSUE.ROOT,
+            appRoutes.DASHBOARD.ISSUE.DETAILS,
+            issue.id,
+          ]"
+          class="block p-4 hover:bg-gray-50">
+          <div class="flex items-start justify-between">
+            <h2
+              class="text-base font-medium text-gray-900 group-hover:text-blue-700">
+              {{ issue.title }}
+            </h2>
+
+            <span
+              class="ml-4 shrink-0 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+              #{{ issue.id }}
+            </span>
+          </div>
+
+          <p class="mt-1 line-clamp-2 text-sm text-gray-600">
+            {{ issue.body }}
+          </p>
+        </a>
+      </li>
+    }
+  </ul>
 }

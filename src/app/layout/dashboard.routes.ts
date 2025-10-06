@@ -6,14 +6,14 @@ export const dashboardRoutes: Route[] = [
     path: APP_ROUTES.DASHBOARD.ISSUE.LIST,
     loadComponent: () =>
       import('../pages/dashboard/issues/issues.component').then(
-        (m) => m.IssuesComponent
+        m => m.IssuesComponent
       ),
   },
   {
     path: APP_ROUTES.DASHBOARD.ISSUE.CREATE,
     loadComponent: () =>
       import('../pages/dashboard/issues/issue-form/issue-form.component').then(
-        (m) => m.IssueFormComponent
+        m => m.IssueFormComponent
       ),
   },
   {
@@ -21,14 +21,14 @@ export const dashboardRoutes: Route[] = [
     loadComponent: () =>
       import(
         '../pages/dashboard/issues/issue-details/issue-details.component'
-      ).then((m) => m.IssueDetailsComponent),
+      ).then(m => m.IssueDetailsComponent),
   },
   {
     path: ':id/' + APP_ROUTES.DASHBOARD.ISSUE.COMMENTS,
     loadComponent: () =>
       import(
         '../pages/dashboard/issues/issue-comments/issue-comments.component'
-      ).then((m) => m.IssueCommentsComponent),
+      ).then(m => m.IssueCommentsComponent),
   },
   { path: '**', redirectTo: 'list' },
 ];

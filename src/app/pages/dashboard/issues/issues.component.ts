@@ -54,7 +54,7 @@ export class IssuesComponent implements OnInit {
       return;
     }
     this.filteredIssues.set(
-      this.issues().filter((issue) => issue.title.toLowerCase().includes(query))
+      this.issues().filter(issue => issue.title.toLowerCase().includes(query))
     );
   }
 

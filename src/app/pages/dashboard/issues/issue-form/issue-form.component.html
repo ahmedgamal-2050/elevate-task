@@ -2,64 +2,72 @@
   <a
     [routerLink]="[
       appRoutes.DASHBOARD.ISSUE.ROOT,
-      appRoutes.DASHBOARD.ISSUE.LIST
+      appRoutes.DASHBOARD.ISSUE.LIST,
     ]"
-    class="inline-flex items-center text-sm text-blue-700 hover:underline"
-    >← Back to issues</a
-  >
+    class="inline-flex items-center text-sm text-blue-700 hover:underline">
+    ← Back to issues
+  </a>
 </div>
 
 <h1 class="mb-4 text-2xl font-semibold text-gray-900">Create Issue</h1>
 
 @if (error()) {
-<div
-  class="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700"
->
-  {{ error() }}
-</div>
-} @if (success()) {
-<div
-  class="mb-4 rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-700"
->
-  {{ success() }}
-</div>
+  <div
+    class="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+    {{ error() }}
+  </div>
+}
+
+@if (success()) {
+  <div
+    class="mb-4 rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-700">
+    {{ success() }}
+  </div>
 }
 
 <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
   <div>
-    <label for="title" class="mb-1 block text-sm font-medium text-gray-700"
-      >Title</label
-    >
+    <label for="title" class="mb-1 block text-sm font-medium text-gray-700">
+      Title
+    </label>
+
     <input
       id="title"
       type="text"
       formControlName="title"
       class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-      placeholder="Enter title"
-    />
+      placeholder="Enter title" />
+
     @if (title.touched && title.invalid) {
-    <p class="mt-1 text-xs text-red-600">
-      @if (title.errors?.['required']) { Title is required. } @if
-      (title.errors?.['minlength']) { Minimum length is 3. }
-    </p>
+      <p class="mt-1 text-xs text-red-600">
+        @if (title.errors?.['required']) {
+          Title is required.
+        }
+        @if (title.errors?.['minlength']) {
+          Minimum length is 3.
+        }
+      </p>
     }
   </div>
 
   <div>
-    <label for="body" class="mb-1 block text-sm font-medium text-gray-700"
-      >Body</label
-    >
+    <label for="body" class="mb-1 block text-sm font-medium text-gray-700">
+      Body
+    </label>
+
     <textarea
       id="body"
       rows="5"
       formControlName="body"
       class="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-      placeholder="Describe the issue..."
-    ></textarea>
+      placeholder="Describe the issue..."></textarea>
+
     @if (body.touched && body.invalid) {
-    <p class="mt-1 text-xs text-red-600">
-      @if (body.errors?.['required']) { Body is required. }
-    </p>
+      <p class="mt-1 text-xs text-red-600">
+        @if (body.errors?.['required']) {
+          Body is required.
+        }
+      </p>
     }
   </div>
 
@@ -67,34 +75,34 @@
     <button
       type="submit"
       [disabled]="submitting() || form.invalid"
-      class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-    >
+      class="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
       @if (submitting()) {
-      <svg
-        class="mr-2 h-4 w-4 animate-spin"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke-width="4"
-        ></circle>
-        <path class="opacity-75" d="M4 12a8 8 0 018-8" stroke-width="4"></path>
-      </svg>
-      } Create
+        <svg
+          class="mr-2 h-4 w-4 animate-spin"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor">
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke-width="4"></circle>
+          <path
+            class="opacity-75"
+            d="M4 12a8 8 0 018-8"
+            stroke-width="4"></path>
+        </svg>
+      }
+      Create
     </button>
 
     <a
       [routerLink]="[
         appRoutes.DASHBOARD.ISSUE.ROOT,
-        appRoutes.DASHBOARD.ISSUE.LIST
+        appRoutes.DASHBOARD.ISSUE.LIST,
       ]"
-      class="text-sm text-gray-600 hover:underline"
-    >
+      class="text-sm text-gray-600 hover:underline">
       Cancel
     </a>
   </div>
