@@ -1,14 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { forkJoin, finalize } from 'rxjs';
 import { IssueService } from '../services/issue.service';
 import { IssueCommentsComponent } from '../issue-comments/issue-comments.component';
+import { APP_ROUTES } from '../../../../common/constants/app-routes.constants';
 
 @Component({
   selector: 'app-issue-details',
-  standalone: true,
-  imports: [CommonModule, RouterLink, IssueCommentsComponent],
+  imports: [RouterLink, IssueCommentsComponent],
   templateUrl: './issue-details.component.html',
   styleUrl: './issue-details.component.scss',
 })
@@ -20,6 +19,7 @@ export class IssueDetailsComponent implements OnInit {
   error = signal<string | null>(null);
   issue = signal<Post | null>(null);
   comments = signal<CommentItem[]>([]);
+  appRoutes = APP_ROUTES;
 
   ngOnInit() {
     this.loadData();
@@ -47,10 +47,6 @@ export class IssueDetailsComponent implements OnInit {
         },
         error: () => this.error.set('Failed to load issue details.'),
       });
-  }
-
-  trackByCommentId(index: number, item: CommentItem) {
-    return item.id;
   }
 }
 

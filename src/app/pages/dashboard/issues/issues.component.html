@@ -55,7 +55,14 @@
   >
     @for (issue of filteredIssues(); track issue.id) {
     <li class="group">
-      <a [routerLink]="['/issue', issue.id]" class="block p-4 hover:bg-gray-50">
+      <a
+        [routerLink]="[
+          appRoutes.DASHBOARD.ISSUE.ROOT,
+          appRoutes.DASHBOARD.ISSUE.DETAILS,
+          issue.id
+        ]"
+        class="block p-4 hover:bg-gray-50"
+      >
         <div class="flex items-start justify-between">
           <h2
             class="text-base font-medium text-gray-900 group-hover:text-indigo-700"

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ENDPOINTS } from '../../../../common/constants/endpoints';
+import { ENDPOINTS } from '../../../../common/constants/endpoints.constants';
 
 @Injectable({
   providedIn: 'root',

@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 import { IssueService } from './services/issue.service';
+import { APP_ROUTES } from '../../../common/constants/app-routes.constants';
 
 interface Post {
   userId: number;
@@ -13,8 +13,7 @@ interface Post {
 
 @Component({
   selector: 'app-issues',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './issues.component.html',
   styleUrl: './issues.component.scss',
 })
@@ -25,6 +24,7 @@ export class IssuesComponent implements OnInit {
   searchTerm = signal('');
   issues = signal<Post[]>([]);
   filteredIssues = signal<Post[]>([]);
+  appRoutes = APP_ROUTES;
 
   ngOnInit() {
     this.getIssues();

@@ -1,5 +1,4 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormControl,
@@ -9,11 +8,11 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IssueService } from '../services/issue.service';
+import { APP_ROUTES } from '../../../../common/constants/app-routes.constants';
 
 @Component({
   selector: 'app-issue-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './issue-form.component.html',
   styleUrl: './issue-form.component.scss',
 })
@@ -25,6 +24,7 @@ export class IssueFormComponent implements OnInit {
   submitting = signal(false);
   success = signal<string | null>(null);
   error = signal<string | null>(null);
+  appRoutes = APP_ROUTES;
 
   form!: FormGroup<{
     title: FormControl<string>;
@@ -52,9 +52,16 @@ export class IssueFormComponent implements OnInit {
         const id = (created as any)?.id;
         this.success.set('Issue created successfully.');
         if (id) {
-          this.router.navigate(['/issue', id]);
+          this.router.navigate([
+            this.appRoutes.DASHBOARD.ISSUE.ROOT,
+            this.appRoutes.DASHBOARD.ISSUE.DETAILS,
+            id,
+          ]);
         } else {
-          this.router.navigate(['/issue/list']);
+          this.router.navigate([
+            this.appRoutes.DASHBOARD.ISSUE.ROOT,
+            this.appRoutes.DASHBOARD.ISSUE.LIST,
+          ]);
         }
       },
       error: () => {
@@ -67,6 +74,7 @@ export class IssueFormComponent implements OnInit {
   get title() {
     return this.form.controls.title;
   }
+
   get body() {
     return this.form.controls.body;
   }
