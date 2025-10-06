@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ENDPOINTS } from '../../../../common/constants/endpoints.constants';
+import { Issue } from '../issues.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,9 @@ export class IssueService {
     );
   }
 
-  postIssue(issue: unknown) {
-    return this.http.post(ENDPOINTS.POST_ISSUE, issue);
+  createIssue(issue: Partial<Issue>) {
+    return this.http.post<Issue>(ENDPOINTS.POST_ISSUE, issue, {
+      observe: 'response',
+    });
   }
 }

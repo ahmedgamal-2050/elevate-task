@@ -4,6 +4,7 @@ import { forkJoin, finalize } from 'rxjs';
 import { IssueService } from '../services/issue.service';
 import { IssueCommentsComponent } from '../issue-comments/issue-comments.component';
 import { APP_ROUTES } from '../../../../common/constants/app-routes.constants';
+import { Issue, CommentItem } from '../issues.model';
 
 @Component({
   selector: 'app-issue-details',
@@ -17,7 +18,7 @@ export class IssueDetailsComponent implements OnInit {
 
   loading = signal(false);
   error = signal<string | null>(null);
-  issue = signal<Post | null>(null);
+  issue = signal<Issue | null>(null);
   comments = signal<CommentItem[]>([]);
   appRoutes = APP_ROUTES;
 
@@ -42,25 +43,10 @@ export class IssueDetailsComponent implements OnInit {
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: ({ issue, comments }) => {
-          this.issue.set(issue as Post);
+          this.issue.set(issue as Issue);
           this.comments.set(comments as CommentItem[]);
         },
         error: () => this.error.set('Failed to load issue details.'),
       });
   }
-}
-
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-interface CommentItem {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
 }

@@ -47,21 +47,29 @@ export class IssueFormComponent implements OnInit {
     this.error.set(null);
     this.success.set(null);
     const payload = this.form.getRawValue();
-    this.issueService.postIssue(payload).subscribe({
-      next: (created: unknown) => {
-        const id = (created as any)?.id;
-        this.success.set('Issue created successfully.');
-        if (id) {
-          this.router.navigate([
-            this.appRoutes.DASHBOARD.ISSUE.ROOT,
-            this.appRoutes.DASHBOARD.ISSUE.DETAILS,
-            id,
-          ]);
-        } else {
-          this.router.navigate([
-            this.appRoutes.DASHBOARD.ISSUE.ROOT,
-            this.appRoutes.DASHBOARD.ISSUE.LIST,
-          ]);
+    this.issueService.createIssue(payload).subscribe({
+      next: (res) => {
+        if (res) {
+          const status = res.status as number | undefined;
+          const created = res.body;
+          if (status === 200 || status === 201) {
+            this.success.set('Issue created successfully.');
+            const id = created.id;
+            if (id) {
+              this.router.navigate([
+                this.appRoutes.DASHBOARD.ISSUE.ROOT,
+                this.appRoutes.DASHBOARD.ISSUE.DETAILS,
+                id,
+              ]);
+            } else {
+              this.router.navigate([
+                this.appRoutes.DASHBOARD.ISSUE.ROOT,
+                this.appRoutes.DASHBOARD.ISSUE.LIST,
+              ]);
+            }
+          } else {
+            this.error.set('Failed to create issue.');
+          }
         }
       },
       error: () => {

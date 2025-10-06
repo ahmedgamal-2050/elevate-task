@@ -3,14 +3,7 @@ import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 import { IssueService } from './services/issue.service';
 import { APP_ROUTES } from '../../../common/constants/app-routes.constants';
-
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
+import { Issue } from './issues.model';
 @Component({
   selector: 'app-issues',
   imports: [RouterLink],
@@ -22,8 +15,8 @@ export class IssuesComponent implements OnInit {
   loading = signal(false);
   error = signal<string | null>(null);
   searchTerm = signal('');
-  issues = signal<Post[]>([]);
-  filteredIssues = signal<Post[]>([]);
+  issues = signal<Issue[]>([]);
+  filteredIssues = signal<Issue[]>([]);
   appRoutes = APP_ROUTES;
 
   ngOnInit() {
@@ -38,7 +31,7 @@ export class IssuesComponent implements OnInit {
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (issues: unknown) => {
-          const data = (issues as Post[]).slice(0, 50);
+          const data = (issues as Issue[]).slice(0, 50);
           this.issues.set(data);
           this.applyFilter();
         },
@@ -65,7 +58,7 @@ export class IssuesComponent implements OnInit {
     );
   }
 
-  trackById(index: number, item: Post) {
+  trackById(index: number, item: Issue) {
     return item.id;
   }
 }

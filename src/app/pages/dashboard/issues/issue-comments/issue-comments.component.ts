@@ -1,12 +1,5 @@
 import { Component, input } from '@angular/core';
-
-interface CommentItem {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
+import { CommentItem } from '../issues.model';
 
 @Component({
   selector: 'app-issue-comments',
