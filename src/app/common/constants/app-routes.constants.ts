@@ -6,7 +6,6 @@ export const APP_ROUTES = {
       LIST: 'list',
       CREATE: 'create',
       DETAILS: 'details',
-      COMMENTS: 'comments',
     },
   },
 };

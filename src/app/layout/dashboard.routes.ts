@@ -23,12 +23,5 @@ export const dashboardRoutes: Route[] = [
         '../pages/dashboard/issues/issue-details/issue-details.component'
       ).then(m => m.IssueDetailsComponent),
   },
-  {
-    path: ':id/' + APP_ROUTES.DASHBOARD.ISSUE.COMMENTS,
-    loadComponent: () =>
-      import(
-        '../pages/dashboard/issues/issue-comments/issue-comments.component'
-      ).then(m => m.IssueCommentsComponent),
-  },
   { path: '**', redirectTo: 'list' },
 ];

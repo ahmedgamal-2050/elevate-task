@@ -57,8 +57,4 @@ export class IssuesComponent implements OnInit {
       this.issues().filter(issue => issue.title.toLowerCase().includes(query))
     );
   }
-
-  trackById(index: number, item: Issue) {
-    return item.id;
-  }
 }
